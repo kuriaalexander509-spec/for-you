@@ -64,27 +64,157 @@
             color: white;
             transition: 0.1s; /* Makes it look like it's jumping */
         }
+
+        /* Login Page Styles */
+        #login-page {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            background: linear-gradient(135deg, #ff69b4 0%, #ff85a1 100%);
+            margin: 0;
+            font-family: 'Arial', sans-serif;
+        }
+
+        .login-container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.95);
+            padding: 50px 40px;
+            border-radius: 30px;
+            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
+            max-width: 400px;
+        }
+
+        .login-container h1 {
+            color: #ff69b4;
+            text-shadow: none;
+            margin-top: 0;
+            font-size: 2rem;
+        }
+
+        .login-container p {
+            color: #666;
+            margin-bottom: 30px;
+            font-size: 1.1rem;
+        }
+
+        .form-group {
+            margin-bottom: 25px;
+            text-align: left;
+        }
+
+        .form-group label {
+            display: block;
+            color: #ff69b4;
+            font-weight: bold;
+            margin-bottom: 8px;
+            font-size: 1.1rem;
+        }
+
+        .form-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #ff85a1;
+            border-radius: 15px;
+            font-size: 1rem;
+            box-sizing: border-box;
+            transition: border-color 0.3s;
+        }
+
+        .form-group input:focus {
+            outline: none;
+            border-color: #ff69b4;
+            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
+        }
+
+        #login-btn {
+            width: 100%;
+            background-color: #ff69b4;
+            color: white;
+            font-size: 1.2rem;
+            padding: 14px;
+            border: none;
+            border-radius: 20px;
+            cursor: pointer;
+            font-weight: bold;
+            transition: background-color 0.3s;
+            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
+        }
+
+        #login-btn:hover {
+            background-color: #ff1493;
+        }
+
+        #valentine-page {
+            display: none;
+        }
     </style>
 </head>
 <body>
-
-    <div class="container">
-        <img id="display-image" src="success.gif" alt="Asking...">
-        <h1 id="question">Will you be my Valentine?</h1>
-        <div class="buttons">
-            <button id="yes-btn">Yes</button>
-            <button id="no-btn">No</button>
+    <!-- Login Page -->
+    <div id="login-page">
+        <div class="login-container">
+            <h1>💝 Valentine's Letter 💝</h1>
+            <p>Let's get started!</p>
+            
+            <form id="login-form">
+                <div class="form-group">
+                    <label for="from-input">From:</label>
+                    <input type="text" id="from-input" placeholder="Your name" required>
+                </div>
+                
+                <div class="form-group">
+                    <label for="to-input">To:</label>
+                    <input type="text" id="to-input" placeholder="Their name" required>
+                </div>
+                
+                <button type="submit" id="login-btn">Continue</button>
+            </form>
         </div>
-        <p style="margin-top: 40px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Created by Alex 💝</p>
+    </div>
+
+    <!-- Valentine Page -->
+    <div id="valentine-page">
+        <div class="container">
+            <img id="display-image" src="success.gif" alt="Asking...">
+            <h1 id="question">Will you be my Valentine?</h1>
+            <div class="buttons">
+                <button id="yes-btn">Yes</button>
+                <button id="no-btn">No</button>
+            </div>
+            <p style="margin-top: 40px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Created by Alex 💝</p>
+        </div>
     </div>
 
     <script>
+        const loginForm = document.getElementById('login-form');
+        const loginPage = document.getElementById('login-page');
+        const valentinePage = document.getElementById('valentine-page');
+        const fromInput = document.getElementById('from-input');
+        const toInput = document.getElementById('to-input');
+
         const noBtn = document.getElementById('no-btn');
         const yesBtn = document.getElementById('yes-btn');
         const question = document.getElementById('question');
         const image = document.getElementById('display-image');
 
         let moveCount = 0;
+
+        // Handle login form submission
+        loginForm.addEventListener('submit', (e) => {
+            e.preventDefault();
+            const fromName = fromInput.value.trim();
+            const toName = toInput.value.trim();
+
+            if (fromName && toName) {
+                // Hide login page and show valentine page
+                loginPage.style.display = 'none';
+                valentinePage.style.display = 'flex';
+                
+                // Update the question with names
+                question.innerHTML = `${toName}, will you be my Valentine?<br><span style="font-size: 0.8em; color: rgba(255, 255, 255, 0.8);">From ${fromName} 💝</span>`;
+            }
+        });
 
         function moveButtonAway() {
             moveCount++;
