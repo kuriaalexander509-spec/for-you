@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Be My Valentine?</title>
+    <style>
+        body {
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            /* Deep Red Background */
+            background-color: #bd0000; 
+            font-family: 'Arial', sans-serif;
+            margin: 0;
+            overflow: hidden;
+        }
+
+        .container {
+            text-align: center;
+            background: rgba(255, 255, 255, 0.1);
+            padding: 40px;
+            border-radius: 30px;
+            backdrop-filter: blur(5px);
+        }
+
+        img {
+            width: 230px;
+            border-radius: 20px;
+            margin-bottom: 20px;
+            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
+        }
+
+        h1 {
+            color: white;
+            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+        }
+
+        .buttons {
+            position: relative;
+            height: 60px;
+            margin-top: 30px;
+        }
+
+        button {
+            font-size: 1.2rem;
+            padding: 12px 28px;
+            border: none;
+            border-radius: 50px;
+            cursor: pointer;
+            font-weight: bold;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
+        }
+
+        #yes-btn {
+            background-color: #ffffff;
+            color: #bd0000;
+        }
+
+        /* Pink No Button */
+        #no-btn {
+            background-color: #ff85a1; 
+            color: white;
+            transition: 0.1s; /* Makes it look like it's jumping */
+        }
+    </style>
+</head>
+<body>
+
+    <div class="container">
+        <img id="display-image" src="success.gif" alt="Asking...">
+        <h1 id="question">Will you be my Valentine?</h1>
+        <div class="buttons">
+            <button id="yes-btn">Yes</button>
+            <button id="no-btn">No</button>
+        </div>
+        <p style="margin-top: 40px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Created by Alex 💝</p>
+    </div>
+
+    <script>
+        const noBtn = document.getElementById('no-btn');
+        const yesBtn = document.getElementById('yes-btn');
+        const question = document.getElementById('question');
+        const image = document.getElementById('display-image');
+
+        let moveCount = 0;
+
+        function moveButtonAway() {
+            // Keep moving the button indefinitely
+            noBtn.style.position = 'fixed';
+            const x = Math.random() * (window.innerWidth - 100);
+            const y = Math.random() * (window.innerHeight - 50);
+            
+            noBtn.style.left = x + 'px';
+            noBtn.style.top = y + 'px';
+            noBtn.style.display = 'block';
+            noBtn.style.visibility = 'visible';
+            
+            moveCount++;
+            
+            // Disappear on the 5th touch attempt
+            if (moveCount >= 5) {
+                noBtn.style.display = 'none';
+                question.innerHTML = "Too slow hehehe 😏";
+            }
+        }
+
+        // Logic for the runaway button
+        noBtn.addEventListener('mouseover', moveButtonAway);
+        noBtn.addEventListener('click', (e) => {
+            e.preventDefault();
+            moveButtonAway();
+        });
+
+        // Logic for clicking Yes
+        yesBtn.addEventListener('click', () => {
+            question.innerHTML = "YAY! See you soon! ❤️";
+            image.src = "asking.gif";
+            // Optional: make the background even brighter red on success!
+            document.body.style.backgroundColor = "#ff0000";
+        });
+    </script>
+</body>
+</html>
