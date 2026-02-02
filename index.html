@@ -88,6 +88,7 @@ const noBtn = document.getElementById("no-btn");
 const yesBtn = document.getElementById("yes-btn");
 const image = document.getElementById("display-image");
 
+// Initialize question
 question.innerHTML = `
 ${toName}, will you be my Valentine?<br>
 <span style="font-size:0.8em;color:rgba(255,255,255,0.8);">
@@ -101,29 +102,46 @@ function moveButtonAway() {
     moveCount++;
 
     if (moveCount >= 5) {
+        // No button disappears
         noBtn.style.display = "none";
         question.innerHTML = "Too slow hehehe 😏";
         image.src = "are you sure.gif";
         yesBtn.innerHTML = "Ok";
     } else {
+        // Move the no button
         noBtn.style.position = "fixed";
         noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
         noBtn.style.top = Math.random() * (window.innerHeight - 80) + "px";
     }
 }
 
-noBtn.addEventListener("mouseenter", moveButtonAway);
+// Only trigger movement if no button visible
+noBtn.addEventListener("mouseenter", () => {
+    if (noBtn.style.display !== "none") moveButtonAway();
+});
 noBtn.addEventListener("click", e => {
     e.preventDefault();
-    moveButtonAway();
+    if (noBtn.style.display !== "none") moveButtonAway();
 });
 
+// Yes button logic
 yesBtn.addEventListener("click", () => {
     if (yesBtn.innerHTML === "Ok") {
-        location.reload();
-    } else {
+        // After clicking Ok -> show YAY message
         question.innerHTML = "YAY! See you soon! ❤️";
         image.src = "asking.gif";
+        yesBtn.innerHTML = "See Ya"; // Change button text
+        noBtn.style.display = "none"; // Keep No hidden
+        document.body.style.backgroundColor = "#ff0000";
+    } else if (yesBtn.innerHTML === "See Ya") {
+        // Close page or redirect blank
+        window.close();
+        window.location.href = "about:blank";
+    } else {
+        // Normal Yes behavior if needed
+        question.innerHTML = "YAY! See you soon! ❤️";
+        image.src = "asking.gif";
+        yesBtn.innerHTML = "See Ya";
         noBtn.style.display = "none";
         document.body.style.backgroundColor = "#ff0000";
     }
