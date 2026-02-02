@@ -102,13 +102,11 @@ function moveButtonAway() {
     moveCount++;
 
     if (moveCount >= 5) {
-        // No button disappears
         noBtn.style.display = "none";
         question.innerHTML = "Too slow hehehe 😏";
         image.src = "are you sure.gif";
         yesBtn.innerHTML = "Ok";
     } else {
-        // Move the no button
         noBtn.style.position = "fixed";
         noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
         noBtn.style.top = Math.random() * (window.innerHeight - 80) + "px";
@@ -127,23 +125,27 @@ noBtn.addEventListener("click", e => {
 // Yes button logic
 yesBtn.addEventListener("click", () => {
     if (yesBtn.innerHTML === "Ok") {
-        // After clicking Ok -> show YAY message
+        // After clicking Ok -> reset to original question, No hidden
+        question.innerHTML = `
+        ${toName}, will you be my Valentine?<br>
+        <span style="font-size:0.8em;color:rgba(255,255,255,0.8);">
+        From ${fromName} 💝
+        </span>
+        `;
+        image.src = "success.gif";
+        yesBtn.innerHTML = "Yes";
+        noBtn.style.display = "none"; // Keep No hidden permanently
+    } else if (yesBtn.innerHTML === "Yes") {
+        // Show YAY message after original question
         question.innerHTML = "YAY! See you soon! ❤️";
         image.src = "asking.gif";
         yesBtn.innerHTML = "See Ya"; // Change button text
-        noBtn.style.display = "none"; // Keep No hidden
+        noBtn.style.display = "none";
         document.body.style.backgroundColor = "#ff0000";
     } else if (yesBtn.innerHTML === "See Ya") {
         // Close page or redirect blank
         window.close();
         window.location.href = "about:blank";
-    } else {
-        // Normal Yes behavior if needed
-        question.innerHTML = "YAY! See you soon! ❤️";
-        image.src = "asking.gif";
-        yesBtn.innerHTML = "See Ya";
-        noBtn.style.display = "none";
-        document.body.style.backgroundColor = "#ff0000";
     }
 });
 </script>
