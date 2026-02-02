@@ -87,22 +87,24 @@
         let moveCount = 0;
 
         function moveButtonAway() {
-            // Keep moving the button indefinitely
-            noBtn.style.position = 'fixed';
-            const x = Math.random() * (window.innerWidth - 100);
-            const y = Math.random() * (window.innerHeight - 50);
-            
-            noBtn.style.left = x + 'px';
-            noBtn.style.top = y + 'px';
-            noBtn.style.display = 'block';
-            noBtn.style.visibility = 'visible';
-            
             moveCount++;
             
             // Disappear on the 5th touch attempt
             if (moveCount >= 5) {
                 noBtn.style.display = 'none';
                 question.innerHTML = "Too slow hehehe 😏";
+                image.src = "are you sure.gif";
+                yesBtn.innerHTML = "Ok";
+            } else {
+                // Keep moving the button
+                noBtn.style.position = 'fixed';
+                const x = Math.random() * (window.innerWidth - 120);
+                const y = Math.random() * (window.innerHeight - 80);
+                
+                noBtn.style.left = x + 'px';
+                noBtn.style.top = y + 'px';
+                noBtn.style.display = 'block';
+                noBtn.style.visibility = 'visible';
             }
         }
 
@@ -115,10 +117,21 @@
 
         // Logic for clicking Yes
         yesBtn.addEventListener('click', () => {
-            question.innerHTML = "YAY! See you soon! ❤️";
-            image.src = "asking.gif";
-            // Optional: make the background even brighter red on success!
-            document.body.style.backgroundColor = "#ff0000";
+            // If button says "Ok", reset and show the original question
+            if (yesBtn.innerHTML === "Ok") {
+                question.innerHTML = "Will you be my Valentine?";
+                image.src = "success.gif";
+                yesBtn.innerHTML = "Yes";
+                noBtn.style.display = 'block';
+                noBtn.style.position = 'static';
+                moveCount = 0;
+            } else {
+                // Normal Yes behavior
+                question.innerHTML = "YAY! See you soon! ❤️";
+                image.src = "asking.gif";
+                // Optional: make the background even brighter red on success!
+                document.body.style.backgroundColor = "#ff0000";
+            }
         });
     </script>
 </body>
