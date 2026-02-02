@@ -88,7 +88,7 @@
 
         function moveButtonAway() {
             moveCount++;
-            
+
             // Disappear on the 5th touch attempt
             if (moveCount >= 5) {
                 noBtn.style.display = 'none';
@@ -100,7 +100,7 @@
                 noBtn.style.position = 'fixed';
                 const x = Math.random() * (window.innerWidth - 120);
                 const y = Math.random() * (window.innerHeight - 80);
-                
+
                 noBtn.style.left = x + 'px';
                 noBtn.style.top = y + 'px';
                 noBtn.style.display = 'block';
@@ -109,7 +109,8 @@
         }
 
         // Logic for the runaway button
-        noBtn.addEventListener('mouseover', moveButtonAway);
+        // Use 'mouseenter' so moving the mouse inside the button doesn't retrigger repeatedly
+        noBtn.addEventListener('mouseenter', moveButtonAway);
         noBtn.addEventListener('click', (e) => {
             e.preventDefault();
             moveButtonAway();
@@ -124,6 +125,10 @@
                 yesBtn.innerHTML = "Yes";
                 noBtn.style.display = 'block';
                 noBtn.style.position = 'static';
+                // Clear inline positioning so it returns to normal layout
+                noBtn.style.left = '';
+                noBtn.style.top = '';
+                noBtn.style.visibility = '';
                 moveCount = 0;
             } else {
                 // Normal Yes behavior
