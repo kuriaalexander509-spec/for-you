@@ -1,275 +1,134 @@
 <!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Be My Valentine?</title>
-    <style>
-        body {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            /* Deep Red Background */
-            background-color: #bd0000; 
-            font-family: 'Arial', sans-serif;
-            margin: 0;
-            overflow: hidden;
-        }
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Be My Valentine?</title>
 
-        .container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.1);
-            padding: 40px;
-            border-radius: 30px;
-            backdrop-filter: blur(5px);
-        }
+<style>
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    height: 100vh;
+    background-color: #bd0000;
+    font-family: Arial, sans-serif;
+    margin: 0;
+    overflow: hidden;
+}
 
-        img {
-            width: 230px;
-            border-radius: 20px;
-            margin-bottom: 20px;
-            box-shadow: 0 10px 20px rgba(0,0,0,0.3);
-        }
+.container {
+    text-align: center;
+    background: rgba(255,255,255,0.1);
+    padding: 40px;
+    border-radius: 30px;
+    backdrop-filter: blur(5px);
+}
 
-        h1 {
-            color: white;
-            text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
-        }
+img {
+    width: 230px;
+    border-radius: 20px;
+    margin-bottom: 20px;
+}
 
-        .buttons {
-            position: relative;
-            height: 60px;
-            margin-top: 30px;
-        }
+h1 {
+    color: white;
+    text-shadow: 2px 2px 4px rgba(0,0,0,0.5);
+}
 
-        button {
-            font-size: 1.2rem;
-            padding: 12px 28px;
-            border: none;
-            border-radius: 50px;
-            cursor: pointer;
-            font-weight: bold;
-            box-shadow: 0 4px 15px rgba(0,0,0,0.2);
-        }
+.buttons {
+    margin-top: 30px;
+}
 
-        #yes-btn {
-            background-color: #ffffff;
-            color: #bd0000;
-        }
+button {
+    font-size: 1.2rem;
+    padding: 12px 28px;
+    border: none;
+    border-radius: 50px;
+    cursor: pointer;
+    font-weight: bold;
+}
 
-        /* Pink No Button */
-        #no-btn {
-            background-color: #ff85a1; 
-            color: white;
-            transition: 0.1s; /* Makes it look like it's jumping */
-        }
+#yes-btn {
+    background-color: white;
+    color: #bd0000;
+}
 
-        /* Login Page Styles */
-        #login-page {
-            display: flex;
-            justify-content: center;
-            align-items: center;
-            height: 100vh;
-            background: linear-gradient(135deg, #ff69b4 0%, #ff85a1 100%);
-            margin: 0;
-            font-family: 'Arial', sans-serif;
-        }
-
-        .login-container {
-            text-align: center;
-            background: rgba(255, 255, 255, 0.95);
-            padding: 50px 40px;
-            border-radius: 30px;
-            box-shadow: 0 10px 40px rgba(0,0,0,0.3);
-            max-width: 400px;
-        }
-
-        .login-container h1 {
-            color: #ff69b4;
-            text-shadow: none;
-            margin-top: 0;
-            font-size: 2rem;
-        }
-
-        .login-container p {
-            color: #666;
-            margin-bottom: 30px;
-            font-size: 1.1rem;
-        }
-
-        .form-group {
-            margin-bottom: 25px;
-            text-align: left;
-        }
-
-        .form-group label {
-            display: block;
-            color: #ff69b4;
-            font-weight: bold;
-            margin-bottom: 8px;
-            font-size: 1.1rem;
-        }
-
-        .form-group input {
-            width: 100%;
-            padding: 12px;
-            border: 2px solid #ff85a1;
-            border-radius: 15px;
-            font-size: 1rem;
-            box-sizing: border-box;
-            transition: border-color 0.3s;
-        }
-
-        .form-group input:focus {
-            outline: none;
-            border-color: #ff69b4;
-            box-shadow: 0 0 10px rgba(255, 105, 180, 0.3);
-        }
-
-        #login-btn {
-            width: 100%;
-            background-color: #ff69b4;
-            color: white;
-            font-size: 1.2rem;
-            padding: 14px;
-            border: none;
-            border-radius: 20px;
-            cursor: pointer;
-            font-weight: bold;
-            transition: background-color 0.3s;
-            box-shadow: 0 4px 15px rgba(255, 105, 180, 0.3);
-        }
-
-        #login-btn:hover {
-            background-color: #ff1493;
-        }
-
-        #valentine-page {
-            display: none;
-        }
-    </style>
+#no-btn {
+    background-color: #ff85a1;
+    color: white;
+    transition: 0.1s;
+}
+</style>
 </head>
+
 <body>
-    <!-- Login Page -->
-    <div id="login-page">
-        <div class="login-container">
-            <h1>💝 Valentine's Letter 💝</h1>
-            <p>Let's get started!</p>
-            
-            <form id="login-form">
-                <div class="form-group">
-                    <label for="from-input">From:</label>
-                    <input type="text" id="from-input" placeholder="Your name" required>
-                </div>
-                
-                <div class="form-group">
-                    <label for="to-input">To:</label>
-                    <input type="text" id="to-input" placeholder="Their name" required>
-                </div>
-                
-                <button type="submit" id="login-btn">Continue</button>
-            </form>
-        </div>
+
+<div class="container">
+    <img id="display-image" src="success.gif" alt="Valentine">
+    <h1 id="question"></h1>
+
+    <div class="buttons">
+        <button id="yes-btn">Yes</button>
+        <button id="no-btn">No</button>
     </div>
 
-    <!-- Valentine Page -->
-    <div id="valentine-page">
-        <div class="container">
-            <img id="display-image" src="success.gif" alt="Asking...">
-            <h1 id="question">Will you be my Valentine?</h1>
-            <div class="buttons">
-                <button id="yes-btn">Yes</button>
-                <button id="no-btn">No</button>
-            </div>
-            <p style="margin-top: 40px; font-size: 0.9rem; color: rgba(255, 255, 255, 0.7);">Created by Alex 💝</p>
-        </div>
-    </div>
+    <p style="margin-top:40px;color:rgba(255,255,255,0.7);font-size:0.9rem;">
+        Created by Alex 💝
+    </p>
+</div>
 
-    <script>
-        const loginForm = document.getElementById('login-form');
-        const loginPage = document.getElementById('login-page');
-        const valentinePage = document.getElementById('valentine-page');
-        const fromInput = document.getElementById('from-input');
-        const toInput = document.getElementById('to-input');
+<script>
+const params = new URLSearchParams(window.location.search);
+const toName = params.get("to") || "My Love";
+const fromName = params.get("from") || "Someone Special";
 
-        const noBtn = document.getElementById('no-btn');
-        const yesBtn = document.getElementById('yes-btn');
-        const question = document.getElementById('question');
-        const image = document.getElementById('display-image');
+const question = document.getElementById("question");
+const noBtn = document.getElementById("no-btn");
+const yesBtn = document.getElementById("yes-btn");
+const image = document.getElementById("display-image");
 
-        let moveCount = 0;
+question.innerHTML = `
+${toName}, will you be my Valentine?<br>
+<span style="font-size:0.8em;color:rgba(255,255,255,0.8);">
+From ${fromName} 💝
+</span>
+`;
 
-        // Handle login form submission
-        loginForm.addEventListener('submit', (e) => {
-            e.preventDefault();
-            const fromName = fromInput.value.trim();
-            const toName = toInput.value.trim();
+let moveCount = 0;
 
-            if (fromName && toName) {
-                // Hide login page and show valentine page
-                loginPage.style.display = 'none';
-                valentinePage.style.display = 'flex';
-                
-                // Update the question with names
-                question.innerHTML = `${toName}, will you be my Valentine?<br><span style="font-size: 0.8em; color: rgba(255, 255, 255, 0.8);">From ${fromName} 💝</span>`;
-            }
-        });
+function moveButtonAway() {
+    moveCount++;
 
-        function moveButtonAway() {
-            moveCount++;
+    if (moveCount >= 5) {
+        noBtn.style.display = "none";
+        question.innerHTML = "Too slow hehehe 😏";
+        image.src = "are you sure.gif";
+        yesBtn.innerHTML = "Ok";
+    } else {
+        noBtn.style.position = "fixed";
+        noBtn.style.left = Math.random() * (window.innerWidth - 120) + "px";
+        noBtn.style.top = Math.random() * (window.innerHeight - 80) + "px";
+    }
+}
 
-            // Disappear on the 5th touch attempt
-            if (moveCount >= 5) {
-                noBtn.style.display = 'none';
-                question.innerHTML = "Too slow hehehe 😏";
-                image.src = "are you sure.gif";
-                yesBtn.innerHTML = "Ok";
-            } else {
-                // Keep moving the button
-                noBtn.style.position = 'fixed';
-                const x = Math.random() * (window.innerWidth - 120);
-                const y = Math.random() * (window.innerHeight - 80);
+noBtn.addEventListener("mouseenter", moveButtonAway);
+noBtn.addEventListener("click", e => {
+    e.preventDefault();
+    moveButtonAway();
+});
 
-                noBtn.style.left = x + 'px';
-                noBtn.style.top = y + 'px';
-                noBtn.style.display = 'block';
-                noBtn.style.visibility = 'visible';
-            }
-        }
+yesBtn.addEventListener("click", () => {
+    if (yesBtn.innerHTML === "Ok") {
+        location.reload();
+    } else {
+        question.innerHTML = "YAY! See you soon! ❤️";
+        image.src = "asking.gif";
+        noBtn.style.display = "none";
+        document.body.style.backgroundColor = "#ff0000";
+    }
+});
+</script>
 
-        // Logic for the runaway button
-        // Use 'mouseenter' so moving the mouse inside the button doesn't retrigger repeatedly
-        noBtn.addEventListener('mouseenter', moveButtonAway);
-        noBtn.addEventListener('click', (e) => {
-            e.preventDefault();
-            moveButtonAway();
-        });
-
-        // Logic for clicking Yes
-        yesBtn.addEventListener('click', () => {
-            // If button says "Ok", reset and show the original question
-            if (yesBtn.innerHTML === "Ok") {
-                question.innerHTML = "Will you be my Valentine?";
-                image.src = "success.gif";
-                yesBtn.innerHTML = "Yes";
-                noBtn.style.display = 'none';
-                noBtn.style.position = 'static';
-                // Clear inline positioning so it returns to normal layout
-                noBtn.style.left = '';
-                noBtn.style.top = '';
-                noBtn.style.visibility = '';
-                moveCount = 0;
-            } else {
-                // Normal Yes behavior
-                question.innerHTML = "YAY! See you soon! ❤️";
-                image.src = "asking.gif";
-                // Optional: make the background even brighter red on success!
-                document.body.style.backgroundColor = "#ff0000";
-                // Hide the No button
-                noBtn.style.display = 'none';
-            }
-        });
-    </script>
 </body>
 </html>
